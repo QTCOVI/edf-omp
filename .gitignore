@@ -1,0 +1,13 @@
+# Compiled object files and Fortran module files
+*.o
+*.mod
+
+# Compiled binaries
+edf
+edf-omp
+
+# MkDocs build output
+site/
+
+# Snapshot archives (libblas.a / liblapack.a are kept — they ship with the source)
+*.tar

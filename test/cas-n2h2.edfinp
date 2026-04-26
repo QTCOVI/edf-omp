@@ -1,0 +1,10 @@
+0
+cas-n2h2.wfn.aom
+cas-n2h2.wfn
+probcut -1.0
+aomnorm 1
+ngroup 3
+1 1
+1 2
+2 3 4
+end

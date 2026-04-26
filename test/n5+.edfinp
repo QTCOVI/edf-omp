@@ -1,0 +1,11 @@
+0
+n5+.wfn.aom
+n5+.wfn
+probcut 0.001
+aomnorm 1
+ngroup 4
+1 1
+1 3
+1 5
+2 2 4
+end
