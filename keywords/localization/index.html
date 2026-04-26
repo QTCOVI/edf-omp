@@ -1,0 +1,2034 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Electron Number Distribution Functions — user manual">
+      
+      
+        <meta name="author" content="E. Francisco & A. Martín Pendás">
+      
+      
+        <link rel="canonical" href="https://qtcovi.github.io/edf-omp/keywords/localization/">
+      
+      
+        <link rel="prev" href="../wavefunction/">
+      
+      
+        <link rel="next" href="../analysis/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>Localization - edf / edf-omp Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#localization-keywords" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="edf / edf-omp Documentation" class="md-header__button md-logo" aria-label="edf / edf-omp Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            edf / edf-omp Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Localization
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../installation/" class="md-tabs__link">
+          
+  
+  
+  Getting Started
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../input-format/" class="md-tabs__link">
+          
+  
+  
+  Input Reference
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../performance/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Performance (edf-omp)
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../output-guide/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Output Guide
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../examples/" class="md-tabs__link">
+          
+  
+  
+  Examples
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../theory/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Theory
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../faq/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  FAQ
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="edf / edf-omp Documentation" class="md-nav__button md-logo" aria-label="edf / edf-omp Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    edf / edf-omp Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Getting Started
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Getting Started
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Installation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../quickstart/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Quick Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input Reference
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Input Reference
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../input-format/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Input Format
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aom-formats/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AOM Formats
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Keywords
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Keywords
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../basic/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Basic Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wavefunction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Wavefunction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Localization
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Localization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#localization-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Localization strategies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Localization strategies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fulloc-allcenter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FULLOC [ALLCENTER]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#canloc-allcenter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CANLOC [ALLCENTER]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chemloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CHEMLOC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aomloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AOMLOC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dafhloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAFHLOC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OPENLOC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#block-keywords" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Block keywords
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Block keywords">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dodafh-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DODAFH … END
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#otheropen-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OTHEROPEN … END
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#localization-control-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Localization control parameters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Localization control parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dafhselect-n-n1-n2-nn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAFHSELECT n n1 n2 … nn
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#critics-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CRITICS real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#covx-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        COVX real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#damps-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAMPS real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mxcent-n-skip1-skip2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MXCENT n [skip1 skip2 …]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#critov-n-critval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CRITOV [n critval]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maxbond-maxbond" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MAXBOND maxbond
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skiph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SKIPH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epsneg-epsneg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EPSNEG [epsneg]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epseigen-epseigen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EPSEIGEN [epseigen]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smalleigen-smalleigen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SMALLEIGEN [smalleigen]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../integration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Integration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../output-control/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Output Control
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../performance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Performance (edf-omp)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../output-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Output Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_6" id="__nav_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Examples
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Examples
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Overview
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/h6/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    H6 ring (RHF)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/n5plus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    N5+ cation (RHF)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/cas-ch4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    CH4 (CASSCF)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/cas-n2h2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    N2H2 (CASSCF)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../examples/n2casb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    N2 CASSCF + rhfmode
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../theory/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Theory
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#localization-strategies" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Localization strategies
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Localization strategies">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#fulloc-allcenter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        FULLOC [ALLCENTER]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#canloc-allcenter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CANLOC [ALLCENTER]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chemloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CHEMLOC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#aomloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        AOMLOC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dafhloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAFHLOC
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#openloc" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OPENLOC
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#block-keywords" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Block keywords
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Block keywords">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dodafh-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DODAFH … END
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#otheropen-end" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OTHEROPEN … END
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#localization-control-parameters" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Localization control parameters
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Localization control parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dafhselect-n-n1-n2-nn" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAFHSELECT n n1 n2 … nn
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#critics-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CRITICS real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#covx-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        COVX real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#damps-real" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DAMPS real
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mxcent-n-skip1-skip2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MXCENT n [skip1 skip2 …]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#critov-n-critval" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        CRITOV [n critval]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#maxbond-maxbond" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        MAXBOND maxbond
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#skiph" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SKIPH
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epsneg-epsneg" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EPSNEG [epsneg]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#epseigen-epseigen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EPSEIGEN [epseigen]
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#smalleigen-smalleigen" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        SMALLEIGEN [smalleigen]
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="localization-keywords">Localization Keywords<a class="headerlink" href="#localization-keywords" title="Permanent link">&para;</a></h1>
+<p>These keywords request an isopycnic (Cioslowski) localization of molecular orbitals. All localization methods maximize a localization criterion constructed from the AOM and produce a set of MOs that are normalized but <strong>not</strong> necessarily orthogonal.</p>
+<hr />
+<h2 id="localization-strategies">Localization strategies<a class="headerlink" href="#localization-strategies" title="Permanent link">&para;</a></h2>
+<h3 id="fulloc-allcenter"><code>FULLOC [ALLCENTER]</code><a class="headerlink" href="#fulloc-allcenter" title="Permanent link">&para;</a></h3>
+<p>Localize the <strong>natural orbitals</strong> from the input WFN using isopycnic localization. The localization function is built from the fragments defined by <code>NGROUP</code>.</p>
+<p>If <code>ALLCENTER</code> is given, the localization function is built using every atomic center as an individual fragment (instead of the user-defined groups).</p>
+<h3 id="canloc-allcenter"><code>CANLOC [ALLCENTER]</code><a class="headerlink" href="#canloc-allcenter" title="Permanent link">&para;</a></h3>
+<p>Localize the <strong>canonical orbitals</strong> from the input WFN. Otherwise identical to <code>FULLOC</code>.</p>
+<h3 id="chemloc"><code>CHEMLOC</code><a class="headerlink" href="#chemloc" title="Permanent link">&para;</a></h3>
+<p>Chemical localization variant. Uses the same isopycnic algorithm but with different weighting — the criterion is more directly linked to chemical bond regions.</p>
+<h3 id="aomloc"><code>AOMLOC</code><a class="headerlink" href="#aomloc" title="Permanent link">&para;</a></h3>
+<p>A second chemical localization variant, closer to the AOM-based formulation.</p>
+<h3 id="dafhloc"><code>DAFHLOC</code><a class="headerlink" href="#dafhloc" title="Permanent link">&para;</a></h3>
+<p>Localization via progressive diagonalization of the <strong>Domain-Averaged Fermi Hole (DAFH)</strong> in 1-, 2-, 3-, … center domains up to <code>MXCENT</code> centers. Produces MOs that are localized on a growing number of atomic centers, yielding 1c-2e (lone pairs), 2c-2e (bonds), and higher-center contributions.</p>
+<h3 id="openloc"><code>OPENLOC</code><a class="headerlink" href="#openloc" title="Permanent link">&para;</a></h3>
+<p>Localization by diagonalizing the <strong>Open Quantum System (OQS)</strong> 1-RDM, i.e., <span class="arithmatex">\(S_A^{1/2} \cdot \text{1-RDM} \cdot S_A^{1/2}\)</span>, for each fragment <span class="arithmatex">\(A\)</span>. Produces Fragment Natural Orbitals (FNOs) localized on each domain.</p>
+<hr />
+<h2 id="block-keywords">Block keywords<a class="headerlink" href="#block-keywords" title="Permanent link">&para;</a></h2>
+<h3 id="dodafh-end"><code>DODAFH … END</code><a class="headerlink" href="#dodafh-end" title="Permanent link">&para;</a></h3>
+<p>Provides full manual control over the DAFH localization sequence. Within the <code>DODAFH</code> … <code>END</code> block, each line specifies one localization step:</p>
+<div class="highlight"><pre><span></span><code>ncen  cutoff  atom1  [atom2 …]  [DEPLET]
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ncen</code></td>
+<td>Number of centers to localize on</td>
+</tr>
+<tr>
+<td><code>cutoff</code></td>
+<td>Acceptance threshold (close to but below 1.0)</td>
+</tr>
+<tr>
+<td><code>atom1 …</code></td>
+<td>Indices of the <code>ncen</code> atoms</td>
+</tr>
+<tr>
+<td><code>DEPLET</code></td>
+<td>After this step, deplete (remove found MO from) the full DAFH</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Example</strong> — C₂H₆, manual DAFH sequence:
+<div class="highlight"><pre><span></span><code>dodafh
+  1 0.95 1
+  1 0.95 2   deplet
+  2 0.95 1 2 deplet
+  2 0.95 1 5
+  2 0.95 1 6
+  2 0.95 1 7 deplet
+  2 0.95 2 3
+  2 0.95 2 4
+  2 0.95 2 8 deplet
+end
+</code></pre></div></p>
+<h3 id="otheropen-end"><code>OTHEROPEN … END</code><a class="headerlink" href="#otheropen-end" title="Permanent link">&para;</a></h3>
+<p>Equivalent to <code>DODAFH … END</code> but uses OQS 1-RDM diagonalization instead of DAFH. Same syntax.</p>
+<hr />
+<h2 id="localization-control-parameters">Localization control parameters<a class="headerlink" href="#localization-control-parameters" title="Permanent link">&para;</a></h2>
+<h3 id="dafhselect-n-n1-n2-nn"><code>DAFHSELECT n n1 n2 … nn</code><a class="headerlink" href="#dafhselect-n-n1-n2-nn" title="Permanent link">&para;</a></h3>
+<p>Restrict the DAFH progressive localization to specific atom tuples. For <code>n</code>-center steps, only the tuples <code>(n1, n2, …, nn)</code> are explored instead of all combinations.</p>
+<p>Multiple <code>DAFHSELECT</code> lines with the same <code>n</code> accumulate — all listed tuples are explored. If no <code>DAFHSELECT</code> line is given for a value of <code>n</code>, all n-tuples are explored.</p>
+<p>Currently only works for single-determinant wavefunctions in <code>DAFHLOC</code> mode.</p>
+<h3 id="critics-real"><code>CRITICS real</code><a class="headerlink" href="#critics-real" title="Permanent link">&para;</a></h3>
+<p>When <code>CANLOC</code> or <code>CHEMLOC</code> is active, an MO is considered to have partial localization on a fragment if its self-overlap <span class="arithmatex">\(S^A_{ii} &gt; \text{real}\)</span> in that fragment. Default is <code>0.02</code>.</p>
+<h3 id="covx-real"><code>COVX real</code><a class="headerlink" href="#covx-real" title="Permanent link">&para;</a></h3>
+<p>Bond detection scaling factor. Atoms A and B are considered bonded if their distance is less than <span class="arithmatex">\((R_A + R_B) \times \text{COVX}\)</span> where <span class="arithmatex">\(R_A\)</span> and <span class="arithmatex">\(R_B\)</span> are stored covalent radii. Default is <code>1.2</code>.</p>
+<h3 id="damps-real"><code>DAMPS real</code><a class="headerlink" href="#damps-real" title="Permanent link">&para;</a></h3>
+<p>Damping factor for <code>CHEMLOC</code>. In each localization cycle, all <code>CRITOV</code> values are multiplied by <code>DAMPS</code> to progressively relax the localization criterion. Must be less than 1.0. Default is <code>0.95</code>.</p>
+<h3 id="mxcent-n-skip1-skip2"><code>MXCENT n [skip1 skip2 …]</code><a class="headerlink" href="#mxcent-n-skip1-skip2" title="Permanent link">&para;</a></h3>
+<p>Maximum number of centers in the progressive DAFH localization (1c, 2c, …, up to <code>n</code>c). Default is <code>6</code>.</p>
+<p>Optional integers after <code>n</code> specify center counts to skip. For example:</p>
+<div class="highlight"><pre><span></span><code>MXCENT 6 3 4
+</code></pre></div>
+<p>analyzes 1-, 2-, 5-, and 6-center localizations, skipping 3 and 4.</p>
+<h3 id="critov-n-critval"><code>CRITOV [n critval]</code><a class="headerlink" href="#critov-n-critval" title="Permanent link">&para;</a></h3>
+<p>Overlap threshold for accepting an MO as localized on an n-center domain. Default for all <code>CRITOV(1..MXCENT)</code> is <code>0.95</code>.</p>
+<ul>
+<li><code>CRITOV</code> alone — no change.</li>
+<li><code>CRITOV n critval</code> — set <code>CRITOV(n) = critval</code>.</li>
+<li><code>CRITOV critval</code> (real number, no integer first) — set all <code>CRITOV(1..MXCENT) = critval</code>.</li>
+</ul>
+<p>Shorthand forms: <code>CRITOV1 critval</code> sets <code>CRITOV(1)</code>, <code>CRITOV2 critval</code> sets <code>CRITOV(2)</code>.</p>
+<h3 id="maxbond-maxbond"><code>MAXBOND maxbond</code><a class="headerlink" href="#maxbond-maxbond" title="Permanent link">&para;</a></h3>
+<p>In the progressive DAFH partitioning for atom pairs, the maximum number of bonds separating atom1 from atom2 that is actually explored. Default is <code>1</code> (only directly bonded pairs). Maximum is <code>4</code>.</p>
+<h3 id="skiph"><code>SKIPH</code><a class="headerlink" href="#skiph" title="Permanent link">&para;</a></h3>
+<p>When true, hydrogen atoms are skipped in the single-atom DAFH analysis. Default is false.</p>
+<h3 id="epsneg-epsneg"><code>EPSNEG [epsneg]</code><a class="headerlink" href="#epsneg-epsneg" title="Permanent link">&para;</a></h3>
+<p>Largest allowed (in absolute value) negative eigenvalue in <code>OPENLOC</code>/<code>OTHEROPEN</code> diagonalizations of matrices that should be positive definite. Default is <code>-1e-6</code>.</p>
+<h3 id="epseigen-epseigen"><code>EPSEIGEN [epseigen]</code><a class="headerlink" href="#epseigen-epseigen" title="Permanent link">&para;</a></h3>
+<p>Eigenvalues smaller than <code>epseigen</code> in the OQS 1-RDM diagonalization are considered to correspond to MOs localized outside the fragment and are discarded.</p>
+<h3 id="smalleigen-smalleigen"><code>SMALLEIGEN [smalleigen]</code><a class="headerlink" href="#smalleigen-smalleigen" title="Permanent link">&para;</a></h3>
+<p>Minimum eigenvalue floor when computing <span class="arithmatex">\(S_A^{-1/2}\)</span>. Eigenvalues of <span class="arithmatex">\(S_A\)</span> below this value are replaced by <code>smalleigen</code> to avoid division by zero.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
