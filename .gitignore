@@ -11,3 +11,6 @@ site/
 
 # Snapshot archives (libblas.a / liblapack.a are kept — they ship with the source)
 *.tar
+
+# Claude Code local settings (tool permissions, not source)
+.claude/settings.local.json

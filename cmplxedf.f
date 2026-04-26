@@ -89,6 +89,10 @@ c
 c.....Construct the second member of the linear system.
 c
       call timer (2,ipid2,'_determ   ',-1)
+!$omp parallel
+!$omp& private(oveaa,indx,ww,determ,deter,dumaom,rcond,m,k,igr,job)
+      allocate(oveaa(nmo,nmo), indx(nmo), ww(nmo))
+!$omp do schedule(dynamic)
       do n=1,npab
         do m=1,nmo
           do k=1,nmo
@@ -107,7 +111,9 @@ c
         call zgedi (oveaa,nmo,nmo,indx,deter,ww,job,determ)
         probs(n)=determ
       enddo
-c
+!$omp end do
+      deallocate(oveaa, indx, ww)
+!$omp end parallel
       call timer (4,ipid2,'_determ   ',-1)
 c
 c.....Linear System Solver: Netlib DGECO routine.

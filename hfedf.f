@@ -103,6 +103,10 @@ c
               enddo
             enddo
           enddo
+!$omp parallel
+!$omp& private(oveaa,indx,ww,deter,dumi,rcond,m,k,igr,job)
+          allocate(oveaa(moval,moval), indx(moval), ww(moval))
+!$omp do schedule(dynamic)
           do n=1,nprobs
             do m=1,malmbe
               do k=1,malmbe
@@ -118,6 +122,9 @@ c
             call dgedi (oveaa,moval,malmbe,indx,deter,ww,job)
             probs(n,ii)=deter(1)*tenp**deter(2)
           enddo
+!$omp end do
+          deallocate(oveaa, indx, ww)
+!$omp end parallel
           job=0
           call dgesl (am,npmax,nprobs,ipvt,probs(1,ii),job)
         else

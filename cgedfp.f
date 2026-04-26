@@ -427,6 +427,10 @@ c
 c
         call timer (2,ipid2,'_determ   ',-1)
 c
+!$omp parallel
+!$omp& private(oveaa,indx,ww,deter,dumi,rcond,m,k,igr,job)
+        allocate(oveaa(nmoa,nmoa), indx(nmoa), ww(nmoa))
+!$omp do schedule(dynamic)
         do n=1,nproba
           do m=1,nmoa
             do k=1,nmoa
@@ -445,6 +449,9 @@ c
           call dgedi (oveaa,nmoa,nmoa,indx,deter,ww,job)
           probsa(n)=deter(1)*tenp**deter(2)
         enddo
+!$omp end do
+        deallocate(oveaa, indx, ww)
+!$omp end parallel
 c
         call timer (4,ipid2,'_determ   ',-1)
 c
@@ -523,6 +530,10 @@ c
 c
         call timer (2,ipid2,'_determ   ',-1)
 c
+!$omp parallel
+!$omp& private(oveaa,indx,ww,deter,dumi,rcond,m,k,igr,job)
+        allocate(oveaa(nmob,nmob), indx(nmob), ww(nmob))
+!$omp do schedule(dynamic)
         do n=1,nprobb
           do m=1,nmob
             do k=1,nmob
@@ -541,6 +552,9 @@ c
           call dgedi (oveaa,nmob,nmob,indx,deter,ww,job)
           probsb(n)=deter(1)*tenp**deter(2)
         enddo
+!$omp end do
+        deallocate(oveaa, indx, ww)
+!$omp end parallel
         deallocate (ikeepar,ikeepac,ikeepbr,ikeepbc)
 c
         call timer (4,ipid2,'_determ   ',-1)
