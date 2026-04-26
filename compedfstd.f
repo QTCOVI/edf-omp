@@ -17,6 +17,8 @@ c
       real   (kind=8), allocatable,dimension (:)   :: w,ww,probt,pnew
       real   (kind=8), allocatable,dimension (:)   :: p1,p1a,p2,d1,p3
       real   (kind=8), allocatable,dimension (:)   :: d2,xli
+      real   (kind=8), allocatable,dimension (:)   :: sp1,sxli,sp2,sp3
+      real   (kind=8), allocatable,dimension (:)   :: sd1,sd2
       real   (kind=8), allocatable,dimension (:)   :: probord
       integer(kind=4), allocatable,dimension (:)   :: ipvt,indx,ind
       integer(kind=4), allocatable,dimension (:,:) :: resnc,resalp
@@ -315,20 +317,36 @@ c
         d2=0.0d+00
       endif
 c
+      ngpair = ngroup*(ngroup-1)/2
+      ntripl = ngroup*(ngroup-1)*(ngroup-2)/6
+!$omp parallel
+!$omp& private(npop,sp1,sxli,sp2,sp3,p,i,j,k,npb,ipair,iter)
+      allocate(npop(ngroup), sp1(ngroup), sxli(ngroup))
+      sp1 = 0.0d+00
+      sxli = 0.0d+00
+      if (ngroup.gt.1) then
+        allocate(sp2(ngpair))
+        sp2 = 0.0d+00
+      endif
+      if (ngroup.gt.2) then
+        allocate(sp3(ntripl))
+        sp3 = 0.0d+00
+      endif
+!$omp do schedule(dynamic)
       do npa=1,npab
         do npb=1,npab
           p=probr(npa,1)*probr(npb,2)
           do i=1,ngroup
             npop(i)=rsrs(npa,i)+rsrs(npb,i)+2*mocore(i)
-            p1(i)=p1(i)+npop(i)*p
-            xli(i)=xli(i)+p*npop(i)*npop(i)
+            sp1(i)=sp1(i)+npop(i)*p
+            sxli(i)=sxli(i)+p*npop(i)*npop(i)
           enddo
           if (ngroup.gt.1) then
             ipair=0
             do i=1,ngroup
               do j=1,i-1
                 ipair=ipair+1
-                p2(ipair)=p2(ipair)+npop(i)*npop(j)*p
+                sp2(ipair)=sp2(ipair)+npop(i)*npop(j)*p
               enddo
             enddo
           endif
@@ -338,13 +356,24 @@ c
               do j=1,i-1
                 do k=1,j-1
                 iter=iter+1
-                p3(iter)=p3(iter)+npop(i)*npop(j)*npop(k)*p
+                sp3(iter)=sp3(iter)+npop(i)*npop(j)*npop(k)*p
                 enddo
               enddo
             enddo
           endif
         enddo
       enddo
+!$omp end do
+!$omp critical
+      p1 = p1 + sp1
+      xli = xli + sxli
+      if (ngroup.gt.1) p2 = p2 + sp2
+      if (ngroup.gt.2) p3 = p3 + sp3
+!$omp end critical
+      deallocate(npop, sp1, sxli)
+      if (ngroup.gt.1) deallocate(sp2)
+      if (ngroup.gt.2) deallocate(sp3)
+!$omp end parallel
 c
       write (lw,11)
       do i=1,ngroup
@@ -372,6 +401,18 @@ c
         enddo
       endif
 c
+!$omp parallel
+!$omp& private(npop,sd1,sd2,p,i,j,k,npb,ipair,iter)
+      allocate(npop(ngroup))
+      if (ngroup.gt.1) then
+        allocate(sd1(ngpair))
+        sd1 = 0.0d+00
+      endif
+      if (ngroup.gt.2) then
+        allocate(sd2(ntripl))
+        sd2 = 0.0d+00
+      endif
+!$omp do schedule(dynamic)
       do npa=1,npab
         do npb=1,npab
           do i=1,ngroup
@@ -383,7 +424,8 @@ c
             do i=1,ngroup
               do j=1,i-1
                 ipair=ipair+1
-                d1(ipair)=d1(ipair)-2*p*(p1(i)-npop(i))*(p1(j)-npop(j))
+                sd1(ipair)=sd1(ipair)-2*p*(p1(i)-npop(i))*
+     &                     (p1(j)-npop(j))
               enddo
             enddo
           endif
@@ -393,14 +435,23 @@ c
               do j=1,i-1
                 do k=1,j-1
                   iter=iter+1
-                  d2(iter)=d2(iter)-
+                  sd2(iter)=sd2(iter)-
      &            2*p*(p1(i)-npop(i))*(p1(j)-npop(j))*(p1(k)-npop(k))
                 enddo
               enddo
             enddo
           endif
-        enddo  
+        enddo
       enddo
+!$omp end do
+!$omp critical
+      if (ngroup.gt.1) d1 = d1 + sd1
+      if (ngroup.gt.2) d2 = d2 + sd2
+!$omp end critical
+      deallocate(npop)
+      if (ngroup.gt.1) deallocate(sd1)
+      if (ngroup.gt.2) deallocate(sd2)
+!$omp end parallel
 c
       do i=1,ngroup
         xli(i)=-(xli(i)-p1(i)*(p1(i)+1.0d+00))
